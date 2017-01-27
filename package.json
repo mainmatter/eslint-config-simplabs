@@ -1,0 +1,25 @@
+{
+  "name": "eslint-config-simplabs",
+  "version": "0.1.0",
+  "description": "Shareable ESLint config for all simplabs projects",
+  "keywords": [
+    "eslint",
+    "eslintconfig"
+  ],
+  "homepage": "https://github.com/simplabs/eslint-config-simplabs#readme",
+  "bugs": {
+    "url": "https://github.com/simplabs/eslint-config-simplabs/issues"
+  },
+  "license": "MIT",
+  "author": "simplabs GmbH <info@simplabs.com>",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/simplabs/eslint-config-simplabs.git"
+  },
+  "scripts": {
+    "test": "node ."
+  },
+  "dependencies": {},
+  "devDependencies": {}
+}
