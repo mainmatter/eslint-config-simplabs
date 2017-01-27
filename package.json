@@ -12,7 +12,7 @@
   },
   "license": "MIT",
   "author": "simplabs GmbH <info@simplabs.com>",
-  "main": "index.js",
+  "main": "configs/ember.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/simplabs/eslint-config-simplabs.git"
