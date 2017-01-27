@@ -1,6 +1,6 @@
 module.exports = {
   rules: {
-    'callback-return': 'off',
+    'callback-return': 'error',
     'global-require': 'off',
     'handle-callback-err': 'off',
     'no-mixed-requires': 'off',
