@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "Shareable ESLint config for all simplabs projects",
   "keywords": [
+    "ember-addon",
     "eslint",
     "eslintconfig"
   ],
@@ -24,5 +25,8 @@
   "devDependencies": {},
   "peerDependencies": {
     "eslint": ">= 3"
+  },
+  "ember-addon": {
+    "main": "index.js"
   }
 }
