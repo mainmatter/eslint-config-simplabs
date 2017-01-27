@@ -5,7 +5,7 @@ module.exports = {
     'no-delete-var': 'error',
     'no-label-var': 'off',
     'no-restricted-globals': 'off',
-    'no-shadow-restricted-names': 'off',
+    'no-shadow-restricted-names': 'error',
     'no-shadow': 'off',
     'no-undef-init': 'off',
     'no-undef': 'error',
