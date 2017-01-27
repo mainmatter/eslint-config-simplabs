@@ -2,3 +2,12 @@ language: node_js
 
 node_js:
   - "6"
+
+deploy:
+  provider: npm
+  email: info@simplabs.com
+  api_key:
+    secure: ZVuQRs3SRqkdsQIFGgb0FGefMcuoE3me/tbqYZRsmcQ4huJNnKRnw/NpqbQmn/uDZE1c1PtezIQIgZcd1/cy086ylJ4kgCP0aaQovWJ0nxnOBB/c7pjIwdkvfNHnFvK9T85S8waSXZPqEVcf4WVRhLpBGP7jCbKCtL5IrkI0paoJV70zexEu7Fu31TPwaT10g0UHPQ6D34FuHCQZZTVSg/km8782Eefw0ZMnSeDAxgsl5oJwjtAafuav1x93h2xgF5d3OX8mDJAvjE+RPXTYAy9lt0T2erq7xgnh5ELVNuBVjzEy7xpwvKHvqiXOgBAjlYhMhZeODM0lPnxEuY+cWJyDEce7J6lP5gAP2GRPD7S2K+7ehpDHiNkYssnLEWwNWak/K/wkKyNXXxaF76A8d6+Mfc6G2xwAWD4cSiqWm9EP9daR2BEzjLAevR+QKbMs2vUcLDkJFsjGRqFdk256yR6z4k6AXSn4h7WVJG/IUk5mIUij43onv+9KqL5EAIk5+l8U7n8aNOTB0TXtAEoM7tYx2Nr7o+Lrkz3xiVng7DdvC470QYi3sLRiuRQWOtYP/1aVu9mES4EokE3X8kUe+OFVm7qnuJAcjKTQuceFRyCJVPnXibb8DcKMzx8+PD6inPvrWyn62zF+OYMihLqC3w83WFlc+vAgM8I1+uKY3e0=
+  on:
+    tags: true
+    repo: simplabs/eslint-config-simplabs
