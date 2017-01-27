@@ -3,9 +3,11 @@ module.exports = {
     node: true
   },
   extends: [
-    'eslint:recommended',
     'simplabs/rules/possible-errors',
     'simplabs/rules/best-practices',
     'simplabs/rules/variables',
+    'simplabs/rules/node',
+    'simplabs/rules/style',
+    'simplabs/rules/es6',
   ],
 };
