@@ -3,7 +3,7 @@ module.exports = {
     node: true
   },
   extends: [
+    'simplabs/configs/node-0.x',
     'simplabs/configs/es6',
-    'simplabs/rules/node',
   ],
 };
