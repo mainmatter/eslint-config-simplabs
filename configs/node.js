@@ -1,8 +1,9 @@
 module.exports = {
   env: {
-    browser: true
+    node: true
   },
   extends: [
     'simplabs/configs/es6',
+    'simplabs/rules/node',
   ],
 };
