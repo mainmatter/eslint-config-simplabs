@@ -30,7 +30,9 @@ module.exports = {
       },
     }],
     'jsx-quotes': 'off',
-    'key-spacing': 'error',
+    'key-spacing': ['error', {
+      'mode': 'minimum',
+    }],
     'keyword-spacing': 'error',
     'line-comment-position': 'off',
     'linebreak-style': 'error',
