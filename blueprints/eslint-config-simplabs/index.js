@@ -30,6 +30,7 @@ module.exports = {
 
   locals: function() {
     return {
+      hasEmberCLIQUnit: this._hasEmberCLIQUnit(),
       hasEmberCLIMocha: this._hasEmberCLIMocha(),
     };
   },
