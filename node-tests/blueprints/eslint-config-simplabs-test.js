@@ -39,7 +39,7 @@ describe('eslint-config-simplabs blueprint', function() {
       .then(() => {
         expect(file('.eslintrc.js')).to.contain('extends: \'simplabs\'');
         expect(file('tests/.eslintrc.js'))
-          .to.equal(`module.exports = {\n  extends: 'simplabs/configs/ember-qunit',\n};\n`);
+          .to.equal(`module.exports = {\n  extends: [\n    'simplabs/configs/ember-qunit',\n    'simplabs/rules/qunit',\n  ],\n};\n`);
       });
   });
 

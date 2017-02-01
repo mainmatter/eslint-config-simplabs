@@ -4,5 +4,8 @@ module.exports = {<% if (hasEmberCLIMocha) { %>
     'simplabs/rules/mocha',
   ],
 <% } else { %>
-  extends: 'simplabs/configs/ember-qunit',
+  extends: [
+    'simplabs/configs/ember-qunit',
+    'simplabs/rules/qunit',
+  ],
 <% } %>};
