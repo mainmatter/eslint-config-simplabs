@@ -38,8 +38,7 @@ describe('eslint-config-simplabs blueprint', function() {
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
         expect(file('.eslintrc.js')).to.contain('extends: \'simplabs\'');
-        expect(file('tests/.eslintrc.js'))
-          .to.equal(`module.exports = {\n  extends: [\n    'simplabs/configs/ember-qunit',\n    'simplabs/rules/qunit',\n  ],\n};\n`);
+        expect(file('tests/.eslintrc.js')).to.equal(file(`${__dirname}/fixtures/.eslintrc.qunit.js`));
       });
   });
 
@@ -52,8 +51,7 @@ describe('eslint-config-simplabs blueprint', function() {
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
         expect(file('.eslintrc.js')).to.contain('extends: \'simplabs\'');
-        expect(file('tests/.eslintrc.js'))
-          .to.equal(`module.exports = {\n  extends: [\n    'simplabs/configs/ember-mocha',\n    'simplabs/rules/mocha',\n  ],\n};\n`);
+        expect(file('tests/.eslintrc.js')).to.equal(file(`${__dirname}/fixtures/.eslintrc.mocha.js`));
       });
   });
 
