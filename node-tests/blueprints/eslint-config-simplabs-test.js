@@ -34,7 +34,20 @@ describe('eslint-config-simplabs blueprint', function() {
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
         expect(file('.eslintrc.js')).to.contain('extends: \'simplabs\'');
-        expect(file('tests/.eslintrc.js')).to.contain('extends: \'simplabs/configs/ember-qunit\'');
+        expect(file('tests/.eslintrc.js')).to.equal(`module.exports = {\n  extends: 'simplabs/configs/ember-qunit',\n};\n`);
+      });
+  });
+
+  it('generates .eslintrc.js files for ember-cli-mocha', function() {
+    return emberNew()
+      .then(() => modifyPackages([
+        { name: 'ember-cli-mocha', dev: true },
+        { name: 'ember-cli-qunit', delete: true },
+      ]))
+      .then(() => emberGenerate(['eslint-config-simplabs']))
+      .then(() => {
+        expect(file('.eslintrc.js')).to.contain('extends: \'simplabs\'');
+        expect(file('tests/.eslintrc.js')).to.equal(`module.exports = {\n  extends: 'simplabs/configs/ember-mocha',\n};\n`);
       });
   });
 

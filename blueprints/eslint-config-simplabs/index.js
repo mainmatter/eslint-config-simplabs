@@ -28,6 +28,12 @@ module.exports = {
     });
   },
 
+  locals: function() {
+    return {
+      hasEmberCLIMocha: this._hasEmberCLIMocha(),
+    };
+  },
+
   afterInstall() {
     let pkgPath = path.join(this.project.root, 'package.json');
 
@@ -40,5 +46,9 @@ module.exports = {
 
       return writeJson(pkgPath, pkg, { spaces: 2 });
     });
+  },
+
+  _hasEmberCLIMocha() {
+    return 'ember-cli-mocha' in this.project.dependencies();
   },
 };
