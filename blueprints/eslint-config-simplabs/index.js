@@ -15,6 +15,19 @@ module.exports = {
     // (since that doesn't actually matter to us)
   },
 
+  beforeInstall() {
+    let pkgPath = path.join(this.project.root, 'package.json');
+
+    return readJson(pkgPath).then(pkg => {
+      let eslintExists = (pkg.dependencies && pkg.dependencies['ember-cli-eslint']) ||
+        (pkg.devDependencies && pkg.devDependencies['ember-cli-eslint']);
+
+      if (!eslintExists) {
+        return this.addAddonToProject('ember-cli-eslint')
+      }
+    });
+  },
+
   afterInstall() {
     let pkgPath = path.join(this.project.root, 'package.json');
 
