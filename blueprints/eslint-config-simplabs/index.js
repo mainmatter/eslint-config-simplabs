@@ -45,6 +45,10 @@ module.exports = {
       pkg.scripts.lint = 'eslint app addon blueprints config server test-support tests *.js';
 
       return writeJson(pkgPath, pkg, { spaces: 2 });
+    }).then(() => {
+      if (this._hasEmberCLIMocha()) {
+        return this.addPackageToProject('eslint-plugin-mocha');
+      }
     });
   },
 
