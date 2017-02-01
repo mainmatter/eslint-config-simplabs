@@ -22,7 +22,10 @@
     "test": "node .",
     "nodetest": "mocha node-tests --recursive"
   },
-  "dependencies": {},
+  "dependencies": {
+    "fs-extra": "^2.0.0",
+    "pify": "^2.3.0"
+  },
   "devDependencies": {
     "ember-cli": "^2.11.0",
     "ember-cli-blueprint-test-helpers": "^0.14.0",
