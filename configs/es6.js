@@ -6,4 +6,7 @@ module.exports = {
     'simplabs/configs/base',
     'simplabs/rules/es6',
   ],
+  env: {
+    es6: true,
+  }
 };
