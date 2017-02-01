@@ -13,7 +13,7 @@ module.exports = {
     'qunit/no-commented-tests': 'error',
     'qunit/no-compare-relation-boolean': 'error',
     'qunit/no-conditional-assertions': 'error',
-    'qunit/no-early-return': 'off',
+    'qunit/no-early-return': 'error',
     'qunit/no-global-assertions': 'off',
     'qunit/no-global-expect': 'off',
     'qunit/no-global-module-test': 'off',
