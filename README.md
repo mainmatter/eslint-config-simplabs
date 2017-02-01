@@ -6,12 +6,10 @@ Shareable ESLint config for all [simplabs](https://simplabs.com/) projects
 Installation
 ------------------------------------------------------------------------------
 
-Make sure [ember-cli-eslint](https://github.com/ember-cli/ember-cli-eslint) is
-installed in your project and then run:
-
 ```
 ember install eslint-config-simplabs
 ```
+
 
 License
 ------------------------------------------------------------------------------
