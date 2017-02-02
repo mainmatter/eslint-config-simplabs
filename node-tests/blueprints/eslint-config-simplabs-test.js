@@ -91,6 +91,16 @@ describe('eslint-config-simplabs blueprint', function() {
       });
   });
 
+  it('does not install `eslint-plugin-ember` if it is not needed', function() {
+    return emberNew()
+      .then(() => modifyPackages([
+        { name: 'eslint-plugin-ember', dev: true },
+        { name: 'ember-cli-qunit', delete: true },
+      ]))
+      .then(() => emberGenerate(['eslint-config-simplabs']))
+      .then(() => td.verify(npmTaskRun(td.matchers.anything()), { times: 0 }));
+  });
+
   it('installs `eslint-plugin-qunit` addon', function() {
     return emberNew()
       .then(() => emberGenerate(['eslint-config-simplabs']))

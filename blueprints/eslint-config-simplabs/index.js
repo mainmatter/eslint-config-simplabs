@@ -49,15 +49,21 @@ module.exports = {
 
       return writeJson(pkgPath, pkg, { spaces: 2 });
     }).then(() => {
-      let packages = [{ name: 'eslint-plugin-ember' }];
+      let packages = [];
 
-      if (this._hasEmberCLIQUnit()) {
+      if (!this._hasEmberPlugin()) {
+        packages.push({ name: 'eslint-plugin-ember' });
+      }
+
+      if (this._hasEmberCLIQUnit() && !this._hasQUnitPlugin()) {
         packages.push({ name: 'eslint-plugin-qunit' });
-      } else if (this._hasEmberCLIMocha()) {
+      } else if (this._hasEmberCLIMocha() && !this._hasMochaPlugin()) {
         packages.push({ name: 'eslint-plugin-mocha' });
       }
 
-      return this.addPackagesToProject(packages);
+      if (packages.length !== 0) {
+        return this.addPackagesToProject(packages);
+      }
     }).then(() => {
       return this.ui.prompt({
         type: 'confirm',
@@ -80,11 +86,23 @@ module.exports = {
     });
   },
 
+  _hasEmberPlugin() {
+    return 'eslint-plugin-ember' in this.project.dependencies();
+  },
+
   _hasEmberCLIQUnit() {
     return 'ember-cli-qunit' in this.project.dependencies();
   },
 
+  _hasQUnitPlugin() {
+    return 'eslint-plugin-qunit' in this.project.dependencies();
+  },
+
   _hasEmberCLIMocha() {
     return 'ember-cli-mocha' in this.project.dependencies();
+  },
+
+  _hasMochaPlugin() {
+    return 'eslint-plugin-mocha' in this.project.dependencies();
   },
 };
