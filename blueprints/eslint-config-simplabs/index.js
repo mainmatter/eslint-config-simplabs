@@ -4,6 +4,7 @@ const path = require('path');
 const fs = require('fs-extra');
 const pify = require('pify');
 const execa = require('execa');
+const supportsColor = require('supports-color');
 
 const readJson = pify(fs.readJson);
 const writeJson = pify(fs.writeJson);
@@ -65,7 +66,12 @@ module.exports = {
       });
     }).then(answer => {
       if (answer.fix) {
-        let child = execa('npm', ['run', 'lint', '--', '--fix'], { cwd: this.project.root });
+        let args = ['run', 'lint', '--', '--fix'];
+        if (supportsColor) {
+          args.push('--color')
+        }
+
+        let child = execa('npm', args, { cwd: this.project.root });
 
         child.stdout.pipe(process.stdout);
 

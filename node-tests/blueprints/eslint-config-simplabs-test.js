@@ -145,7 +145,7 @@ describe('eslint-config-simplabs blueprint', function() {
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
         td.verify(prompt(td.matchers.anything()), { times: 1 });
-        td.verify(execa('npm', ['run', 'lint', '--', '--fix']), { times: 1, ignoreExtraArgs: true });
+        td.verify(execa('npm'), { times: 1, ignoreExtraArgs: true });
       });
   });
 
