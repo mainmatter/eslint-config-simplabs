@@ -30,6 +30,7 @@ module.exports = {
 
   locals: function() {
     return {
+      hasEmberCLIQUnit: this._hasEmberCLIQUnit(),
       hasEmberCLIMocha: this._hasEmberCLIMocha(),
     };
   },
@@ -46,10 +47,16 @@ module.exports = {
 
       return writeJson(pkgPath, pkg, { spaces: 2 });
     }).then(() => {
-      if (this._hasEmberCLIMocha()) {
+      if (this._hasEmberCLIQUnit()) {
+        return this.addPackageToProject('eslint-plugin-qunit');
+      } else if (this._hasEmberCLIMocha()) {
         return this.addPackageToProject('eslint-plugin-mocha');
       }
     });
+  },
+
+  _hasEmberCLIQUnit() {
+    return 'ember-cli-qunit' in this.project.dependencies();
   },
 
   _hasEmberCLIMocha() {
