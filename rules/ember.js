@@ -6,7 +6,7 @@ module.exports = {
     // General
     'ember/local-modules': 'error',
     'ember/no-observers': 'off',
-    'ember/no-side-effect': 'error',
+    'ember/no-side-effects': 'error',
     'ember/jquery-ember-run': 'off',
     'ember/named-functions-in-promises': 'off',
     'ember/no-function-prototype-extensions': 'error',
