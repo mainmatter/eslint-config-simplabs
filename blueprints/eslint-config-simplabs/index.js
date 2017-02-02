@@ -47,11 +47,15 @@ module.exports = {
 
       return writeJson(pkgPath, pkg, { spaces: 2 });
     }).then(() => {
+      let packages = [{ name: 'eslint-plugin-ember' }];
+
       if (this._hasEmberCLIQUnit()) {
-        return this.addPackageToProject('eslint-plugin-qunit');
+        packages.push({ name: 'eslint-plugin-qunit' });
       } else if (this._hasEmberCLIMocha()) {
-        return this.addPackageToProject('eslint-plugin-mocha');
+        packages.push({ name: 'eslint-plugin-mocha' });
       }
+
+      return this.addPackagesToProject(packages);
     });
   },
 

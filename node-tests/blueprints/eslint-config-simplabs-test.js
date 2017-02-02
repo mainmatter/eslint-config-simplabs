@@ -37,7 +37,7 @@ describe('eslint-config-simplabs blueprint', function() {
     return emberNew()
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
-        expect(file('.eslintrc.js')).to.contain('extends: \'simplabs\'');
+        expect(file('.eslintrc.js')).to.equal(file(`${__dirname}/fixtures/.eslintrc.main.js`));
         expect(file('tests/.eslintrc.js')).to.equal(file(`${__dirname}/fixtures/.eslintrc.qunit.js`));
       });
   });
@@ -50,7 +50,7 @@ describe('eslint-config-simplabs blueprint', function() {
       ]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
-        expect(file('.eslintrc.js')).to.contain('extends: \'simplabs\'');
+        expect(file('.eslintrc.js')).to.equal(file(`${__dirname}/fixtures/.eslintrc.main.js`));
         expect(file('tests/.eslintrc.js')).to.equal(file(`${__dirname}/fixtures/.eslintrc.mocha.js`));
       });
   });
@@ -89,21 +89,14 @@ describe('eslint-config-simplabs blueprint', function() {
   it('installs `eslint-plugin-qunit` addon', function() {
     return emberNew()
       .then(() => emberGenerate(['eslint-config-simplabs']))
-      .then(() => {
-        let captor = td.matchers.captor();
-        td.verify(npmTaskRun(captor.capture()), { times: 1 });
-        expect(captor.value).to.have.property('packages');
-        expect(captor.value.packages).to.deep.equal(['eslint-plugin-qunit']);
-      });
+      .then(() => verifyNpmInstalls(['eslint-plugin-ember', 'eslint-plugin-qunit']));
   });
 
   it('does not install `eslint-plugin-qunit` if it is not needed', function() {
     return emberNew()
       .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
-      .then(() => {
-        td.verify(npmTaskRun(td.matchers.anything()), { times: 0 });
-      });
+      .then(() => verifyNpmInstalls(['eslint-plugin-ember']));
   });
 
   it('installs `eslint-plugin-mocha` addon', function() {
@@ -113,20 +106,20 @@ describe('eslint-config-simplabs blueprint', function() {
         { name: 'ember-cli-qunit', delete: true },
       ]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
-      .then(() => {
-        let captor = td.matchers.captor();
-        td.verify(npmTaskRun(captor.capture()), { times: 1 });
-        expect(captor.value).to.have.property('packages');
-        expect(captor.value.packages).to.deep.equal(['eslint-plugin-mocha']);
-      });
+      .then(() => verifyNpmInstalls(['eslint-plugin-ember', 'eslint-plugin-mocha']));
   });
 
   it('does not install `eslint-plugin-mocha` if it is not needed', function() {
     return emberNew()
       .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
-      .then(() => {
-        td.verify(npmTaskRun(td.matchers.anything()), { times: 0 });
-      });
+      .then(() => verifyNpmInstalls(['eslint-plugin-ember']));
   });
+
+  function verifyNpmInstalls(packages) {
+    let captor = td.matchers.captor();
+    td.verify(npmTaskRun(captor.capture()), { times: 1 });
+    expect(captor.value).to.have.property('packages');
+    expect(captor.value.packages).to.deep.equal(packages);
+  }
 });
