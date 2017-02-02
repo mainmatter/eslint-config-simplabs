@@ -3,6 +3,7 @@
 const path = require('path');
 const fs = require('fs-extra');
 const pify = require('pify');
+const execa = require('execa');
 
 const readJson = pify(fs.readJson);
 const writeJson = pify(fs.writeJson);
@@ -56,6 +57,20 @@ module.exports = {
       }
 
       return this.addPackagesToProject(packages);
+    }).then(() => {
+      return this.ui.prompt({
+        type: 'confirm',
+        name: 'fix',
+        message: 'Do you want to run `eslint --fix` now?',
+      });
+    }).then(answer => {
+      if (answer.fix) {
+        let child = execa('npm', ['run', 'lint', '--', '--fix'], { cwd: this.project.root });
+
+        child.stdout.pipe(process.stdout);
+
+        return child.catch(() => { /* ¯\_(ツ)_/¯ */ });
+      }
     });
   },
 
