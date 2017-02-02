@@ -11,11 +11,13 @@ let { expect, file } = require('ember-cli-blueprint-test-helpers/chai');
 const td = require('testdouble');
 
 const Blueprint = require('ember-cli/lib/models/blueprint');
+const MockUI = require('console-ui/mock');
+const execa = td.replace('execa');
 
 describe('eslint-config-simplabs blueprint', function() {
   setupTestHooks(this);
 
-  let taskFor, addonTaskRun, npmTaskRun;
+  let taskFor, addonTaskRun, npmTaskRun, prompt;
 
   beforeEach(function() {
     addonTaskRun = td.function();
@@ -27,6 +29,9 @@ describe('eslint-config-simplabs blueprint', function() {
     taskFor = td.replace(Blueprint.prototype, 'taskFor');
     td.when(taskFor('addon-install')).thenReturn({ run: addonTaskRun });
     td.when(taskFor('npm-install')).thenReturn({ run: npmTaskRun });
+
+    prompt = td.replace(MockUI.prototype, 'prompt');
+    td.when(prompt(td.matchers.anything())).thenResolve({ fix: false });
   });
 
   afterEach(function() {
@@ -114,6 +119,34 @@ describe('eslint-config-simplabs blueprint', function() {
       .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => verifyNpmInstalls(['eslint-plugin-ember']));
+  });
+
+  it('asks the user to confirm `eslint --fix` execution', function() {
+    return emberNew()
+      .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
+      .then(() => emberGenerate(['eslint-config-simplabs']))
+      .then(() => {
+        td.verify(prompt(td.matchers.anything()), { times: 1 });
+        td.verify(execa(), { times: 0, ignoreExtraArgs: true });
+      });
+  });
+
+  it('runs `eslint --fix` if confirmed', function() {
+    let resolved = Promise.resolve();
+    resolved.stdout = {
+      pipe() {},
+    };
+
+    td.when(prompt(td.matchers.anything())).thenResolve({ fix: true });
+    td.when(execa(), { ignoreExtraArgs: true }).thenReturn(resolved);
+
+    return emberNew()
+      .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
+      .then(() => emberGenerate(['eslint-config-simplabs']))
+      .then(() => {
+        td.verify(prompt(td.matchers.anything()), { times: 1 });
+        td.verify(execa('npm', ['run', 'lint', '--', '--fix']), { times: 1, ignoreExtraArgs: true });
+      });
   });
 
   function verifyNpmInstalls(packages) {
