@@ -52,13 +52,13 @@ module.exports = {
       let packages = [];
 
       if (!this._hasEmberPlugin()) {
-        packages.push({ name: 'eslint-plugin-ember' });
+        packages.push({ name: 'eslint-plugin-ember', target: '^2.2.2' });
       }
 
       if (this._hasEmberCLIQUnit() && !this._hasQUnitPlugin()) {
-        packages.push({ name: 'eslint-plugin-qunit' });
+        packages.push({ name: 'eslint-plugin-qunit', target: '^2.3.0' });
       } else if (this._hasEmberCLIMocha() && !this._hasMochaPlugin()) {
-        packages.push({ name: 'eslint-plugin-mocha' });
+        packages.push({ name: 'eslint-plugin-mocha', target: '^4.8.0' });
       }
 
       if (packages.length !== 0) {

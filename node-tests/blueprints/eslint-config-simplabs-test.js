@@ -104,14 +104,14 @@ describe('eslint-config-simplabs blueprint', function() {
   it('installs `eslint-plugin-qunit` addon', function() {
     return emberNew()
       .then(() => emberGenerate(['eslint-config-simplabs']))
-      .then(() => verifyNpmInstalls(['eslint-plugin-ember', 'eslint-plugin-qunit']));
+      .then(() => verifyNpmInstalls(['eslint-plugin-ember@^2.2.2', 'eslint-plugin-qunit@^2.3.0']));
   });
 
   it('does not install `eslint-plugin-qunit` if it is not needed', function() {
     return emberNew()
       .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
-      .then(() => verifyNpmInstalls(['eslint-plugin-ember']));
+      .then(() => verifyNpmInstalls(['eslint-plugin-ember@^2.2.2']));
   });
 
   it('installs `eslint-plugin-mocha` addon', function() {
@@ -121,14 +121,14 @@ describe('eslint-config-simplabs blueprint', function() {
         { name: 'ember-cli-qunit', delete: true },
       ]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
-      .then(() => verifyNpmInstalls(['eslint-plugin-ember', 'eslint-plugin-mocha']));
+      .then(() => verifyNpmInstalls(['eslint-plugin-ember@^2.2.2', 'eslint-plugin-mocha@^4.8.0']));
   });
 
   it('does not install `eslint-plugin-mocha` if it is not needed', function() {
     return emberNew()
       .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
-      .then(() => verifyNpmInstalls(['eslint-plugin-ember']));
+      .then(() => verifyNpmInstalls(['eslint-plugin-ember@^2.2.2']));
   });
 
   it('asks the user to confirm `eslint --fix` execution', function() {
