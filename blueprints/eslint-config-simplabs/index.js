@@ -52,7 +52,7 @@ module.exports = {
       let packages = [];
 
       if (!this._hasEmberPlugin()) {
-        packages.push({ name: 'eslint-plugin-ember', target: '^2.2.2' });
+        packages.push({ name: 'eslint-plugin-ember', target: '^3.0.1' });
       }
 
       if (this._hasEmberCLIQUnit() && !this._hasQUnitPlugin()) {

@@ -21,7 +21,6 @@ module.exports = {
 
     // Controllers
     'ember/alias-model-in-controller': 'off',
-    'ember/query-params-on-top': 'error',
 
     // Components
     'ember/avoid-leaking-state-in-components': 'error',
