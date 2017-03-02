@@ -5,12 +5,23 @@ const fs = require('fs-extra');
 const pify = require('pify');
 const execa = require('execa');
 const supportsColor = require('supports-color');
+const VersionChecker = require('ember-cli-version-checker');
 
 const readJson = pify(fs.readJson);
 const writeJson = pify(fs.writeJson);
 
+let emberPluginVersion = '^3.0.1';
+let qunitPluginVersion = '^2.3.0';
+let mochaPluginVersion = '^4.8.0';
+
 module.exports = {
   name: 'eslint-config-simplabs',
+
+  init() {
+    this._super && this._super.init.apply(this, arguments);
+
+    this._checker = new VersionChecker(this);
+  },
 
   normalizeEntityName() {
     // this prevents an error when the entityName is not specified
@@ -52,13 +63,13 @@ module.exports = {
       let packages = [];
 
       if (!this._hasEmberPlugin()) {
-        packages.push({ name: 'eslint-plugin-ember', target: '^3.0.1' });
+        packages.push({ name: 'eslint-plugin-ember', target: emberPluginVersion });
       }
 
       if (this._hasEmberCLIQUnit() && !this._hasQUnitPlugin()) {
-        packages.push({ name: 'eslint-plugin-qunit', target: '^2.3.0' });
+        packages.push({ name: 'eslint-plugin-qunit', target: qunitPluginVersion });
       } else if (this._hasEmberCLIMocha() && !this._hasMochaPlugin()) {
-        packages.push({ name: 'eslint-plugin-mocha', target: '^4.8.0' });
+        packages.push({ name: 'eslint-plugin-mocha', target: mochaPluginVersion });
       }
 
       if (packages.length !== 0) {
@@ -87,7 +98,8 @@ module.exports = {
   },
 
   _hasEmberPlugin() {
-    return 'eslint-plugin-ember' in this.project.dependencies();
+    return 'eslint-plugin-ember' in this.project.dependencies() &&
+      this._checker.for('eslint-plugin-ember', 'npm').satisfies(emberPluginVersion);
   },
 
   _hasEmberCLIQUnit() {
@@ -95,7 +107,8 @@ module.exports = {
   },
 
   _hasQUnitPlugin() {
-    return 'eslint-plugin-qunit' in this.project.dependencies();
+    return 'eslint-plugin-qunit' in this.project.dependencies() &&
+      this._checker.for('eslint-plugin-qunit', 'npm').satisfies(qunitPluginVersion);
   },
 
   _hasEmberCLIMocha() {
@@ -103,6 +116,7 @@ module.exports = {
   },
 
   _hasMochaPlugin() {
-    return 'eslint-plugin-mocha' in this.project.dependencies();
+    return 'eslint-plugin-mocha' in this.project.dependencies() &&
+      this._checker.for('eslint-plugin-mocha', 'npm').satisfies(mochaPluginVersion);
   },
 };
