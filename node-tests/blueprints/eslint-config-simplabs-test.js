@@ -37,7 +37,7 @@ describe('eslint-config-simplabs blueprint', function() {
     td.when(taskFor('npm-install')).thenReturn({ run: npmTaskRun });
 
     prompt = td.replace(MockUI.prototype, 'prompt');
-    td.when(prompt(td.matchers.anything())).thenResolve({ fix: false });
+    td.when(prompt(td.matchers.anything())).thenResolve({ answer: 'overwrite', fix: false });
   });
 
   afterEach(function() {
@@ -79,6 +79,7 @@ describe('eslint-config-simplabs blueprint', function() {
 
   it('installs `ember-cli-eslint` addon', function() {
     return emberNew()
+      .then(() => modifyPackages([{ name: 'ember-cli-eslint', delete: true }]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
         let captor = td.matchers.captor();
@@ -144,7 +145,7 @@ describe('eslint-config-simplabs blueprint', function() {
       .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
-        td.verify(prompt(td.matchers.anything()), { times: 1 });
+        td.verify(prompt(td.matchers.anything()), { times: 3 });
         td.verify(execa(), { times: 0, ignoreExtraArgs: true });
       });
   });
@@ -155,14 +156,14 @@ describe('eslint-config-simplabs blueprint', function() {
       pipe() {},
     };
 
-    td.when(prompt(td.matchers.anything())).thenResolve({ fix: true });
+    td.when(prompt(td.matchers.anything())).thenResolve({ answer: 'overwrite', fix: true });
     td.when(execa(), { ignoreExtraArgs: true }).thenReturn(resolved);
 
     return emberNew()
       .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
-        td.verify(prompt(td.matchers.anything()), { times: 1 });
+        td.verify(prompt(td.matchers.anything()), { times: 3 });
         td.verify(execa('npm'), { times: 1, ignoreExtraArgs: true });
       });
   });
