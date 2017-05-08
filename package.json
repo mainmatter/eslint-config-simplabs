@@ -23,7 +23,7 @@
     "nodetest": "mocha node-tests --recursive"
   },
   "dependencies": {
-    "ember-cli-version-checker": "^1.2.0",
+    "ember-cli-version-checker": "^2.0.0",
     "execa": "^0.7.0",
     "fs-extra": "^3.0.1",
     "supports-color": "^4.1.0"
