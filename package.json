@@ -27,7 +27,7 @@
     "execa": "^0.7.0",
     "fs-extra": "^2.0.0",
     "pify": "^2.3.0",
-    "supports-color": "^3.2.3"
+    "supports-color": "^4.1.0"
   },
   "devDependencies": {
     "ember-cli": "~2.12.0",
