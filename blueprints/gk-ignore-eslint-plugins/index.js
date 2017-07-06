@@ -2,10 +2,6 @@
 
 const path = require('path');
 const fs = require('fs-extra');
-const pify = require('pify');
-
-const readJson = pify(fs.readJson);
-const writeJson = pify(fs.writeJson);
 
 module.exports = {
   name: 'gk-ignore-eslint-plugins',
@@ -18,7 +14,7 @@ module.exports = {
   afterInstall() {
     let pkgPath = path.join(this.project.root, 'package.json');
 
-    return readJson(pkgPath).then(pkg => {
+    return fs.readJson(pkgPath).then(pkg => {
       pkg.greenkeeper = pkg.greenkeeper || {};
       pkg.greenkeeper.ignore = pkg.greenkeeper.ignore || [];
 
@@ -34,7 +30,7 @@ module.exports = {
         pkg.greenkeeper.ignore.push('eslint-plugin-mocha');
       }
 
-      return writeJson(pkgPath, pkg, { spaces: 2 });
+      return fs.writeJson(pkgPath, pkg, { spaces: 2 });
     });
   },
 

@@ -2,13 +2,9 @@
 
 const path = require('path');
 const fs = require('fs-extra');
-const pify = require('pify');
 const execa = require('execa');
 const supportsColor = require('supports-color');
 const VersionChecker = require('ember-cli-version-checker');
-
-const readJson = pify(fs.readJson);
-const writeJson = pify(fs.writeJson);
 
 let emberPluginVersion = '^3.0.1';
 let qunitPluginVersion = '^2.3.0';
@@ -31,7 +27,7 @@ module.exports = {
   beforeInstall() {
     let pkgPath = path.join(this.project.root, 'package.json');
 
-    return readJson(pkgPath).then(pkg => {
+    return fs.readJson(pkgPath).then(pkg => {
       let eslintExists = (pkg.dependencies && pkg.dependencies['ember-cli-eslint']) ||
         (pkg.devDependencies && pkg.devDependencies['ember-cli-eslint']);
 
@@ -51,14 +47,14 @@ module.exports = {
   afterInstall() {
     let pkgPath = path.join(this.project.root, 'package.json');
 
-    return readJson(pkgPath).then(pkg => {
+    return fs.readJson(pkgPath).then(pkg => {
       if (!('scripts' in pkg)) {
         pkg.scripts = {};
       }
 
       pkg.scripts.lint = 'eslint app addon blueprints config server test-support tests *.js';
 
-      return writeJson(pkgPath, pkg, { spaces: 2 });
+      return fs.writeJson(pkgPath, pkg, { spaces: 2 });
     }).then(() => {
       let packages = [];
 

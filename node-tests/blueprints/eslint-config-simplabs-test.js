@@ -1,7 +1,6 @@
 'use strict';
 
 const fs = require('fs-extra');
-const pify = require('pify');
 
 var blueprintHelpers = require('ember-cli-blueprint-test-helpers/helpers');
 var setupTestHooks = blueprintHelpers.setupTestHooks;
@@ -16,9 +15,6 @@ const td = require('testdouble');
 const Blueprint = require('ember-cli/lib/models/blueprint');
 const MockUI = require('console-ui/mock');
 const execa = td.replace('execa');
-
-const writeJson = pify(fs.writeJson);
-const mkdirp = pify(fs.mkdirp);
 
 describe('eslint-config-simplabs blueprint', function() {
   setupTestHooks(this);
@@ -104,8 +100,8 @@ describe('eslint-config-simplabs blueprint', function() {
         { name: 'eslint-plugin-ember', dev: true },
         { name: 'ember-cli-qunit', delete: true },
       ]))
-      .then(() => mkdirp('node_modules/eslint-plugin-ember'))
-      .then(() => writeJson('node_modules/eslint-plugin-ember/package.json', { version: '3.0.1' }))
+      .then(() => fs.mkdirp('node_modules/eslint-plugin-ember'))
+      .then(() => fs.writeJson('node_modules/eslint-plugin-ember/package.json', { version: '3.0.1' }))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => td.verify(npmTaskRun(td.matchers.anything()), { times: 0 }));
   });
