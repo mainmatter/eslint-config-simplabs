@@ -66,7 +66,7 @@ module.exports = {
     'no-with': 'error',
     'prefer-promise-reject-errors': 'error',
     'radix': 'error',
-    'require-await': 'error',
+    'require-await': 'off',
     'vars-on-top': 'off',
     'wrap-iife': 'error',
     'yoda': 'error',
