@@ -11,6 +11,9 @@ module.exports = {
     'no-undef': 'error',
     'no-undefined': 'off',
     'no-unused-vars': 'error',
-    'no-use-before-define': ['error', 'nofunc']
+    'no-use-before-define': ['error', {
+      'classes': false,
+      'functions': false,
+    }]
   },
 };
