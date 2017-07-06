@@ -84,7 +84,9 @@ module.exports = {
     'object-curly-spacing': ['error', 'always'],
     'object-property-newline': 'off',
     'one-var-declaration-per-line': ['error', 'initializations'],
-    'one-var': 'off',
+    'one-var': ['error', {
+      'initialized': 'never',
+    }],
     'operator-assignment': 'error',
     'operator-linebreak': 'off',
     'padded-blocks': 'off',
