@@ -4,7 +4,7 @@ module.exports = {
   ],
   rules: {
     // General
-    'ember/local-modules': 'error',
+    'ember/local-modules': 'off',
     'ember/no-observers': 'off',
     'ember/no-side-effects': 'error',
     'ember/jquery-ember-run': 'off',
