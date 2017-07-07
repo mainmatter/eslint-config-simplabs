@@ -8,7 +8,7 @@ module.exports = {
     }],
     'camelcase': 'off',
     'capitalized-comments': 'off',
-    'comma-dangle': 'off',
+    'comma-dangle': ['error', 'always-multiline'],
     'comma-spacing': 'error',
     'comma-style': 'error',
     'computed-property-spacing': 'error',
