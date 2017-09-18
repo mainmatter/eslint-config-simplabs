@@ -32,7 +32,7 @@
     "ember-cli": "~2.15.0",
     "ember-cli-blueprint-test-helpers": "^0.17.0",
     "mocha": "^3.2.0",
-    "testdouble": "^3.0.0"
+    "testdouble": "^3.2.6"
   },
   "peerDependencies": {
     "eslint": ">= 3"
