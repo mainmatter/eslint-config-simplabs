@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "ember-cli-version-checker": "^1.2.0",
-    "execa": ">=0.7.0 <1",
+    "execa": ">=1.0.0",
     "fs-extra": "^5.0.0",
     "supports-color": "^5.0.1"
   },
