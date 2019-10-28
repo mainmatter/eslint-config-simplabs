@@ -39,5 +39,8 @@
   },
   "ember-addon": {
     "main": "index.js"
+  },
+  "engines": {
+    "node": "8.* || 10.* || >= 12.*"
   }
 }
