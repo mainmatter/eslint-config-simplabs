@@ -39,8 +39,8 @@ module.exports = {
 
   locals: function() {
     return {
-      hasEmberCLIQUnit: this._hasEmberCLIQUnit(),
-      hasEmberCLIMocha: this._hasEmberCLIMocha(),
+      hasQUnit: this._hasEmberCLIQUnit() || this._hasEmberQUnit(),
+      hasMocha: this._hasEmberCLIMocha() || this._hasEmberMocha(),
     };
   },
 
@@ -62,9 +62,9 @@ module.exports = {
         packages.push({ name: 'eslint-plugin-ember', target: emberPluginVersion });
       }
 
-      if (this._hasEmberCLIQUnit() && !this._hasQUnitPlugin()) {
+      if ((this._hasEmberCLIQUnit() || this._hasEmberQUnit()) && !this._hasQUnitPlugin()) {
         packages.push({ name: 'eslint-plugin-qunit', target: qunitPluginVersion });
-      } else if (this._hasEmberCLIMocha() && !this._hasMochaPlugin()) {
+      } else if ((this._hasEmberCLIMocha() || this._hasEmberMocha()) && !this._hasMochaPlugin()) {
         packages.push({ name: 'eslint-plugin-mocha', target: mochaPluginVersion });
       }
 
@@ -102,6 +102,10 @@ module.exports = {
     return 'ember-cli-qunit' in this.project.dependencies();
   },
 
+  _hasEmberQUnit() {
+    return 'ember-qunit' in this.project.dependencies();
+  },
+
   _hasQUnitPlugin() {
     return 'eslint-plugin-qunit' in this.project.dependencies() &&
       this._checker.for('eslint-plugin-qunit', 'npm').satisfies(qunitPluginVersion);
@@ -109,6 +113,10 @@ module.exports = {
 
   _hasEmberCLIMocha() {
     return 'ember-cli-mocha' in this.project.dependencies();
+  },
+
+  _hasEmberMocha() {
+    return 'ember-mocha' in this.project.dependencies();
   },
 
   _hasMochaPlugin() {
