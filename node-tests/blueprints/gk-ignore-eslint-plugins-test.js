@@ -31,6 +31,7 @@ describe('gk-ignore-eslint-plugins blueprint', function() {
   it('adds mocha plugin to the ignore list', function() {
     return emberNew()
       .then(() => modifyPackages([
+        { name: 'eslint-plugin-ember', dev: true },
         { name: 'eslint-plugin-mocha', dev: true },
       ]))
       .then(() => emberGenerate(['gk-ignore-eslint-plugins']))
@@ -38,7 +39,7 @@ describe('gk-ignore-eslint-plugins blueprint', function() {
         let pkg = JSON.parse(fs.readFileSync('package.json'));
         expect(pkg.greenkeeper).to.be.an('object');
         expect(pkg.greenkeeper.ignore).to.be.an('array');
-        expect(pkg.greenkeeper.ignore).to.deep.equal(['eslint-plugin-mocha']);
+        expect(pkg.greenkeeper.ignore).to.deep.equal(['eslint-plugin-ember', 'eslint-plugin-mocha']);
       });
   });
 });
