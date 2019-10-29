@@ -1,5 +1,6 @@
 /* eslint-env node */
+'use strict';
 
 module.exports = {
-  name: 'eslint-config-simplabs',
+  name: require('./package').name
 };

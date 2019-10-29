@@ -67,7 +67,6 @@ These configs can be used by extending `simplabs/configs/<config-name>`.
 
 These plugin settings can be used by extending `simplabs/plugins/<plugin-name>`. 
 
-
 License
 ------------------------------------------------------------------------------
 
