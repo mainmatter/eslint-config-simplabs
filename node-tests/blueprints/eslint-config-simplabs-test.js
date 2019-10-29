@@ -141,7 +141,7 @@ describe('eslint-config-simplabs blueprint', function() {
       .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
-        td.verify(prompt(td.matchers.anything()), { times: 3 });
+        td.verify(prompt(td.matchers.anything()), { times: 2 });
         td.verify(execa(), { times: 0, ignoreExtraArgs: true });
       });
   });
@@ -159,7 +159,7 @@ describe('eslint-config-simplabs blueprint', function() {
       .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
-        td.verify(prompt(td.matchers.anything()), { times: 3 });
+        td.verify(prompt(td.matchers.anything()), { times: 2 });
         td.verify(execa('npm'), { times: 1, ignoreExtraArgs: true });
       });
   });
