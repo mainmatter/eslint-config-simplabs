@@ -53,7 +53,7 @@ describe('eslint-config-simplabs blueprint', function() {
     return emberNew()
       .then(() => modifyPackages([
         { name: 'ember-cli-mocha', dev: true },
-        { name: 'ember-cli-qunit', delete: true },
+        { name: 'ember-qunit', delete: true },
       ]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
@@ -98,7 +98,7 @@ describe('eslint-config-simplabs blueprint', function() {
     return emberNew()
       .then(() => modifyPackages([
         { name: 'eslint-plugin-ember', dev: true },
-        { name: 'ember-cli-qunit', delete: true },
+        { name: 'ember-qunit', delete: true },
       ]))
       .then(() => fs.mkdirp('node_modules/eslint-plugin-ember'))
       .then(() => fs.writeJson('node_modules/eslint-plugin-ember/package.json', { version: '3.0.1' }))
@@ -114,7 +114,7 @@ describe('eslint-config-simplabs blueprint', function() {
 
   it('does not install `eslint-plugin-qunit` if it is not needed', function() {
     return emberNew()
-      .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
+      .then(() => modifyPackages([{ name: 'ember-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => verifyNpmInstalls(['eslint-plugin-ember@^3.0.1']));
   });
@@ -123,7 +123,7 @@ describe('eslint-config-simplabs blueprint', function() {
     return emberNew()
       .then(() => modifyPackages([
         { name: 'ember-cli-mocha', dev: true },
-        { name: 'ember-cli-qunit', delete: true },
+        { name: 'ember-qunit', delete: true },
       ]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => verifyNpmInstalls(['eslint-plugin-ember@^3.0.1', 'eslint-plugin-mocha@^4.8.0']));
@@ -131,14 +131,14 @@ describe('eslint-config-simplabs blueprint', function() {
 
   it('does not install `eslint-plugin-mocha` if it is not needed', function() {
     return emberNew()
-      .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
+      .then(() => modifyPackages([{ name: 'ember-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => verifyNpmInstalls(['eslint-plugin-ember@^3.0.1']));
   });
 
   it('asks the user to confirm `eslint --fix` execution', function() {
     return emberNew()
-      .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
+      .then(() => modifyPackages([{ name: 'ember-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
         td.verify(prompt(td.matchers.anything()), { times: 2 });
@@ -156,7 +156,7 @@ describe('eslint-config-simplabs blueprint', function() {
     td.when(execa(), { ignoreExtraArgs: true }).thenReturn(resolved);
 
     return emberNew()
-      .then(() => modifyPackages([{ name: 'ember-cli-qunit', delete: true },]))
+      .then(() => modifyPackages([{ name: 'ember-qunit', delete: true },]))
       .then(() => emberGenerate(['eslint-config-simplabs']))
       .then(() => {
         td.verify(prompt(td.matchers.anything()), { times: 2 });
