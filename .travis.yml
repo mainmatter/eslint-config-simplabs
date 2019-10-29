@@ -15,3 +15,6 @@ deploy:
   on:
     tags: true
     repo: simplabs/eslint-config-simplabs
+
+notifications:
+  email: false
