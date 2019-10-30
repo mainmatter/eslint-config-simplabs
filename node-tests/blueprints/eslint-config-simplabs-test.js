@@ -62,6 +62,19 @@ describe('eslint-config-simplabs blueprint', function() {
       });
   });
 
+  it('generates .eslintrc.js files for ember-cli-mocha', function() {
+    return emberNew()
+      .then(() => modifyPackages([
+        { name: 'ember-mocha', dev: true },
+        { name: 'ember-qunit', delete: true },
+      ]))
+      .then(() => emberGenerate(['eslint-config-simplabs']))
+      .then(() => {
+        expect(file('.eslintrc.js')).to.equal(file(`${__dirname}/fixtures/.eslintrc.main.js`));
+        expect(file('tests/.eslintrc.js')).to.equal(file(`${__dirname}/fixtures/.eslintrc.mocha.js`));
+      });
+  });
+
   it('creates a "lint" script in package.json', function() {
     return emberNew()
       .then(() => emberGenerate(['eslint-config-simplabs']))
