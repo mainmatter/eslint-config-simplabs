@@ -31,7 +31,7 @@
   "devDependencies": {
     "ember-cli": "~2.17.0",
     "ember-cli-blueprint-test-helpers": "^0.18.0",
-    "mocha": "^6.2.2",
+    "mocha": "^7.0.0",
     "testdouble": "^3.0.0"
   },
   "peerDependencies": {
