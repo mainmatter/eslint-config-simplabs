@@ -4,6 +4,7 @@ node_js:
   - "10"
 
 script:
+  - yarn run lint
   - yarn test
   - yarn run nodetest
 
