@@ -5,7 +5,9 @@ module.exports = {
   env: {
     browser: true
   },
+  plugins: ['ember'],
   extends: [
     'simplabs/configs/es6',
+    'plugin:ember/recommended',
   ],
 };
