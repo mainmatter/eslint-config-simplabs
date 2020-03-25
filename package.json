@@ -19,6 +19,7 @@
     "url": "git+https://github.com/simplabs/eslint-config-simplabs.git"
   },
   "scripts": {
+    "lint": "eslint *.js",
     "test": "node .",
     "nodetest": "mocha node-tests --recursive"
   },
@@ -31,6 +32,7 @@
   "devDependencies": {
     "ember-cli": "~2.17.0",
     "ember-cli-blueprint-test-helpers": "^0.19.2",
+    "eslint": "^6.8.0",
     "mocha": "^7.0.0",
     "testdouble": "^3.0.0"
   },
