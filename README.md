@@ -1,3 +1,12 @@
+**This project is archived and not actively maintained anymore.**
+
+Instead of relying on this package, we recommend using individual ESLint
+configs and plugins:
+
+* https://github.com/prettier/eslint-plugin-prettier
+* https://github.com/ember-cli/eslint-plugin-ember
+* https://github.com/lo1tuma/eslint-plugin-mocha or https://github.com/platinumazure/eslint-plugin-qunit
+
 eslint-config-simplabs
 ==============================================================================
 
